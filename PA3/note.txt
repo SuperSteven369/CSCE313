@@ -1,0 +1,11 @@
+// INCLUDE
+stdio.h
+sys/types.h
+unistd.h
+sys/wait.h
+iostream
+
+//DEMO
+cd test
+sleep 10 & ([1] 3534)
+jobs ([1]+ Done sleep 10)

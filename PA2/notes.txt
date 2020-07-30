@@ -1,0 +1,72 @@
+Have to compile client and server separately
+
+In each CSV
+
+1st column: Time stamp (4 ms)
+2nd column: 1st data point(x)
+3rd column: 2nd data point(y)
+
+datamsg -> defined in the starter code. common.h
+
+d-> person (which csv 1-15)
+d-> seconds which row
+d->ecgno which column
+
+common.h
+
+datamsg {
+person
+seconds
+ecgno -> ecg number
+}
+
+How to run
+./server &
+./client
+
+fifo. If there are not two processes: one process reading and one process writing, both process are terminated
+When a client sends a quit msg
+QUIT_MSG;
+
+how to send a datamessage:
+datamsg d(14, 59.00, 2);
+chan.cwrite(&d, sizeof(datamsg))
+double resp = 0;
+how to read the response back:
+chan.cread((char*)resp, sizeof(double));)
+cout << resp << endl;
+
+
+Offer .3% of course:
+write a block of code that sends a file message
+
+// Our Answer
+void sendfilemsg(int64 offset, int length){
+filemsg f(offset,length);
+chan.cwrite(&f, sizeof(filemsg))
+double resp = 0;
+}
+
+// Correct Answer
+string filename;
+char* buf = new char[sizeof(filemsg) + filename.size]
+filemsg* f = (filemsg*) buf;
+f->mtype = FILE_MSG;
+f->offset = 0; 
+f->length = 5000;
+// memcpy(buf + sizeof(filemsg, filename.c_str(), filename.size() + 1);
+strcpy(buf + sizeof(filemsg, filename.c_str());
+chan.cwrite(buf, sizeof(filemsg) + filename.size + 1);
+
+
+// PA2
+Open two terminals
+t1: sudo ./server
+t2: sudo ./client
+
+cd received
+diff 9.csv 10.csv
+./client -f 100MB.dat
+./client -m 4096 -f 100MB.dat
+./client -m 512
+./client -c

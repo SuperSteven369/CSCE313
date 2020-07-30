@@ -1,0 +1,16 @@
+Tips for gdb:
+run
+break main // add breakpoint at main
+print Node1
+next
+print Node1->val
+break 12 //add breakpoint at line 12
+continue
+
+// command line
+g++ -g ex1.cpp -fsanitize=address
+
+// install gdb on ubuntu
+sudo apt-get update
+sudo apt-get install gdb
+gdb --version.
